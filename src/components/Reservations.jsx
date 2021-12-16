@@ -117,10 +117,19 @@ class Reservations extends Component {
                     this.state.reservations.length === 0 ? <div>empty</div> : <div>full</div>
                 } */}
 
+                {/* for transforming a string (which is a date from the DB) to another string */}
+                {/* maybe with awereness of which day of the week it represents */}
+                {/* we'll have to follow a 2-step-process: */}
+                {/* 1) we'll need to convert the string from the DB to an actual Date */}
+                {/* 2) once we have a Date object, we can convert it back to another string */}
+
                 <ListGroup>
                     {
                         this.state.reservations.map(r => (
-                            <ListGroup.Item key={r._id}>{r.name} - we are in {r.numberOfPeople} at {r.dateTime}</ListGroup.Item>
+                            <ListGroup.Item key={r._id}>{r.name} - we are in {r.numberOfPeople} at {' '}
+                                {format(parseISO(r.dateTime), 'MMMM do yyyy | HH:mm')}
+                                {/* {r.dateTime} */}
+                            </ListGroup.Item>
                         ))
                     }
                 </ListGroup>
